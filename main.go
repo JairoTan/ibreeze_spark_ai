@@ -175,12 +175,19 @@ func main() {
 		url := "http://api.weixin.qq.com/cgi-bin/message/custom/send"
 		resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 		fmt.Println("微信接口url：", url)
-		fmt.Println("微信接口返回内容：", resp)
 		if err != nil {
 			fmt.Println("请求微信接口报错：", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
+
+		// 将消息体转换为 JSON
+		requestBody, err = json.Marshal(msgBody)
+		if err != nil {
+			fmt.Println("JSON编码失败:", err)
+			return
+		}
+		fmt.Println("微信接口返回内容：", requestBody)
 		defer resp.Body.Close()
 
 		// 处理响应
