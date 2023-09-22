@@ -16,9 +16,9 @@ var dbInstance *gorm.DB
 func Init() error {
 
 	source := "%s:%s@tcp(%s)/%s?readTimeout=1500ms&writeTimeout=1500ms&charset=utf8&loc=Local&&parseTime=true"
-	user := os.Getenv("MYSQL_USERNAME")
-	pwd := os.Getenv("MYSQL_PASSWORD")
-	addr := os.Getenv("MYSQL_ADDRESS")
+	user := "root"
+	pwd := "ab8GFjqz"
+	addr := "10.2.111.184:3306" //sh-cynosdbmysql-grp-2w5k9qsc.sql.tencentcdb.com:25021		10.2.111.184:3306
 	dataBase := os.Getenv("MYSQL_DATABASE")
 	if dataBase == "" {
 		dataBase = "golang_demo"

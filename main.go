@@ -195,40 +195,40 @@ func main() {
 	//})
 
 	//被动消息回复
-	//r.POST("/spark/answer", func(c *gin.Context) {
-	//	var reqMsg struct {
-	//		ToUserName   string `json:"ToUserName"`
-	//		FromUserName string `json:"FromUserName"`
-	//		MsgType      string `json:"MsgType"`
-	//		Content      string `json:"Content"`
-	//		CreateTime   int64  `json:"CreateTime"`
-	//	}
-	//
-	//	if err := c.BindJSON(&reqMsg); err != nil {
-	//		c.JSON(http.StatusBadRequest, gin.H{"error": "JSON数据包解析失败"})
-	//		return
-	//	}
-	//
-	//	if reqMsg.MsgType == "text" {
-	//		//获取星火AI
-	//		answer := util.SparkAnswer(reqMsg.Content)
-	//		c.JSON(http.StatusOK, gin.H{
-	//			"ToUserName":   reqMsg.FromUserName,
-	//			"FromUserName": reqMsg.ToUserName,
-	//			"CreateTime":   reqMsg.CreateTime,
-	//			"MsgType":      "text",
-	//			"Content":      answer,
-	//		})
-	//	} else {
-	//		c.JSON(http.StatusOK, gin.H{
-	//			"ToUserName":   reqMsg.FromUserName,
-	//			"FromUserName": reqMsg.ToUserName,
-	//			"CreateTime":   reqMsg.CreateTime,
-	//			"MsgType":      "text",
-	//			"Content":      "暂时不支持文本之外的回复",
-	//		})
-	//	}
-	//})
+	r.POST("/spark/answer", func(c *gin.Context) {
+		var reqMsg struct {
+			ToUserName   string `json:"ToUserName"`
+			FromUserName string `json:"FromUserName"`
+			MsgType      string `json:"MsgType"`
+			Content      string `json:"Content"`
+			CreateTime   int64  `json:"CreateTime"`
+		}
+
+		if err := c.BindJSON(&reqMsg); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "JSON数据包解析失败"})
+			return
+		}
+
+		if reqMsg.MsgType == "text" {
+			//获取星火AI
+			answer := util.SparkAnswer(reqMsg.Content)
+			c.JSON(http.StatusOK, gin.H{
+				"ToUserName":   reqMsg.FromUserName,
+				"FromUserName": reqMsg.ToUserName,
+				"CreateTime":   reqMsg.CreateTime,
+				"MsgType":      "text",
+				"Content":      answer,
+			})
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"ToUserName":   reqMsg.FromUserName,
+				"FromUserName": reqMsg.ToUserName,
+				"CreateTime":   reqMsg.CreateTime,
+				"MsgType":      "text",
+				"Content":      "暂时不支持文本之外的回复",
+			})
+		}
+	})
 
 	r.Run(":80")
 }
