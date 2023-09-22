@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"wxcloudrun-golang/db/dao"
-	"wxcloudrun-golang/db/model"
+	"ibreeze_spark_ai/db/dao"
+	"ibreeze_spark_ai/db/model"
 
 	"gorm.io/gorm"
 )

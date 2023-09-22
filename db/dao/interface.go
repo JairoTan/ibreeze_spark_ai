@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"wxcloudrun-golang/db/model"
+	"ibreeze_spark_ai/db/model"
 )
 
 // CounterInterface 计数器数据模型接口

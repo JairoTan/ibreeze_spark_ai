@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"wxcloudrun-golang/db"
-	"wxcloudrun-golang/db/model"
+	"ibreeze_spark_ai/db"
+	"ibreeze_spark_ai/db/model"
 )
 
 const tableName = "Counters"
