@@ -133,11 +133,13 @@ func main() {
 		fmt.Printf("公众号 %s 接收用户openid为 %s 的 %s 消息：%s", reqMsg.ToUserName, reqMsg.FromUserName, reqMsg.MsgType, reqMsg.Content)
 		fmt.Println("ToUserName:", reqMsg.ToUserName)
 		fmt.Println("FromUserName:", reqMsg.FromUserName)
-		//异步获取星火AI答案
+		//异步获取AI答案
 		var answer string
 		if reqMsg.MsgType == "text" {
-			answer = util.SparkAnswer(reqMsg.Content)
-			fmt.Println("星火AI回答：", answer)
+			//answer = util.SparkAnswer(reqMsg.Content)
+			//fmt.Println("讯飞星火回答：", answer)
+			answer = util.WenXinAnswer(reqMsg.Content)
+			fmt.Println("文心一言回答：", answer)
 		} else {
 			answer = "暂不支持文本以外的消息回复"
 			fmt.Println("不是文本消息,拒绝回答!")
