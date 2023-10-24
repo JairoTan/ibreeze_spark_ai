@@ -9,11 +9,20 @@ import (
 	"strings"
 )
 
+type UsageDetail struct {
+	PromptTokens     int64 `json:"prompt_tokens"`
+	CompletionTokens int64 `json:"completion_tokens"`
+	TotalTokens      int64 `json:"total_tokens"`
+}
+
 type WenXinResp struct {
-	Id      string `json:"id"`
-	Object  string `json:"object"`
-	Created string `json:"created"`
-	Result  string `json:"result"`
+	Id               string      `json:"id"`
+	Object           string      `json:"object"`
+	Created          int64       `json:"created"`
+	Result           string      `json:"result"`
+	IsTruncated      bool        `json:"is_truncated"`
+	NeedClearHistory bool        `json:"need_clear_history"`
+	Usage            UsageDetail `json:"usage"`
 }
 
 const API_KEY = "PRiRux1KiXtvIvDeqLLqov8G"
