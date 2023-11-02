@@ -30,24 +30,35 @@ const SECRET_KEY = "trdRGgcN31pyVhDBeGyzllzenDem8Wo0"
 
 func WenXinAnswer(question string) string {
 
-	url := "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=" + GetAccessToken()
+	//url := "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=" + GetAccessToken()
+
+	//知识库
+	url := "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/plugin/q27mjzk6e75msfyg/?access_token=" + GetAccessToken()
 
 	// 构建请求参数
+	//reqData := map[string]interface{}{
+	//	"messages": []map[string]interface{}{
+	//		{
+	//			"role":    "user",
+	//			"content": question,
+	//		},
+	//	},
+	//	"temperature": 0.1,
+	//	//说明：
+	//	//（1）较高的数值会使输出更加随机，而较低的数值会使其更加集中和确定
+	//	//（2）默认0.95，范围 (0, 1.0]，不能为0
+	//	//（3）建议该参数和top_p只设置1个
+	//	//（4）建议top_p和temperature不要同时更改
+	//	"system": "我是铂睿思AI客服，有什么可以帮您",
+	//}
+
+	//知识库请求body
 	reqData := map[string]interface{}{
-		"messages": []map[string]interface{}{
-			{
-				"role":    "user",
-				"content": question,
-			},
-		},
-		"temperature": 0.1,
-		//说明：
-		//（1）较高的数值会使输出更加随机，而较低的数值会使其更加集中和确定
-		//（2）默认0.95，范围 (0, 1.0]，不能为0
-		//（3）建议该参数和top_p只设置1个
-		//（4）建议top_p和temperature不要同时更改
-		"system": "我是铂睿思AI客服，有什么可以帮您",
+		"query":   question,
+		"plugins": []string{"uuid-zhishiku"},
+		"verbose": true,
 	}
+
 	reqBody, _ := json.Marshal(reqData)
 
 	client := &http.Client{}
